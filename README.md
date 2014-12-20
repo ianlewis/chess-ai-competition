@@ -5,7 +5,7 @@ Chess API Competition is a service for chess AI and/or humans to play and rank a
 
 # Architecture
 
-![Architecture image](doc/img/arch.jpg)
+![Architecture image](doc/img/arch.png)
 
 The architecture is service oriented and broken up into multiple servers communicating using JSON.
 
