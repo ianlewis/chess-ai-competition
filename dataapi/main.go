@@ -176,6 +176,7 @@ func main() {
     http.Handle("/", router)
 
     // TODO: Start ListenAndServe in a separate goroutine and handle shutdown more gracefully
+    // See: http://www.hydrogen18.com/blog/stop-listening-http-server-go.html
     Log.Info.Println("Starting app on port 8080")
     err := http.ListenAndServe(":8080", nil)
     if err != nil {
