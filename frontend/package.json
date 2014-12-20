@@ -1,0 +1,8 @@
+{ "name": "frontend",
+  "version": "0.0.1",
+  "description": "Frontend service for chess-ai-competition",
+  "repository": "https://github.com/IanLewis/chess-ai-competition",
+  "dependencies": {
+    "requirejs": "2.1.15"
+  }
+}
