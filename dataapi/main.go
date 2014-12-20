@@ -1,19 +1,41 @@
 package main
 
+// TODO: Load config from environment variables.
+
 import (
+    "os"
     "fmt"
+    "log"
     "strconv"
     "net/http"
     "encoding/json"
     "github.com/gorilla/mux"
-    // TODO: Use SQL driver.
     //_ "github.com/lib/pq"
     //"database/sql"
 )
 
+/*
+Various loggers for each level.
+Normal application logging is done to stdout and stderr.
+TODO: Support suppressing log messages.
+*/
+var Log = struct{
+    Debug   *log.Logger
+    Info    *log.Logger
+    Warning *log.Logger
+    Error   *log.Logger
+    Fatal   *log.Logger
+}{
+    log.New(os.Stdout, "[DEBUG]   ", log.Ldate|log.Ltime|log.Lshortfile),
+    log.New(os.Stdout, "[INFO]    ", log.Ldate|log.Ltime|log.Lshortfile),
+    log.New(os.Stdout, "[WARNING] ", log.Ldate|log.Ltime|log.Lshortfile),
+    log.New(os.Stderr, "[ERROR]   ", log.Ldate|log.Ltime|log.Lshortfile),
+    log.New(os.Stderr, "[FATAL]   ", log.Ldate|log.Ltime|log.Lshortfile),
+}
+
+// TODO: Implement database access
 /*func openDB() (*sql.DB, error) {
     // TODO: ?sslmode=verify-full
-    // TODO: Get database info from environment variables
     db, err := sql.Open("postgres", "postgres://chessapp:password@localhost/chessapp")
     return db, err
 }*/
@@ -152,5 +174,12 @@ func main() {
     router.HandleFunc("/game/", getGames)
 
     http.Handle("/", router)
-    http.ListenAndServe(":8080", nil)
+
+    // TODO: Start ListenAndServe in a separate goroutine and handle shutdown more gracefully
+    Log.Info.Println("Starting app on port 8080")
+    err := http.ListenAndServe(":8080", nil)
+    if err != nil {
+        Log.Fatal.Println(err.Error())
+    }
+    Log.Info.Println("App terminated successfully")
 }
