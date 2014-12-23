@@ -13,9 +13,19 @@ require.js ([AMD](http://requirejs.org/docs/whyamd.html)) for defining modules.
 
 Here's what you need to do to get the frontend running.
 
+## Install Node.js
+
+You'll need node.js to run the frontend app. Download it from
+http://nodejs.org/
+
 ## Install Dependencies
 
-Install the dependencies using npm. The dependencies are defined in
+Node.js comes with the Node Package Manager (npm). Install the dependencies for
+the frontend using npm. The dependencies are defined in
 [package.json](package.json) so you just need to run:
 
     $ npm install
+
+## Run the dev server
+
+TODO
