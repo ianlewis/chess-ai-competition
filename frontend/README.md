@@ -13,12 +13,6 @@ require.js ([AMD](http://requirejs.org/docs/whyamd.html)) for defining modules.
 
 Here's what you need to do to get the frontend running.
 
-## Install grunt
-
-[Grunt](http://gruntjs.com/) is required for application development.
-
-    $ npm install -g grunt-cli
-
 ## Install Dependencies
 
 Install the dependencies using npm. The dependencies are defined in
