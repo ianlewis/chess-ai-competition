@@ -10,6 +10,7 @@ var bodyParser = require('body-parser');
 var nunjucks = require('nunjucks');
 
 var routes = require('./routes/index');
+var games = require('./routes/games');
 
 var app = express();
 
@@ -21,7 +22,6 @@ nunjucks.configure('views', {
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -31,7 +31,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use('/static', express.static(path.join(__dirname, 'public')));
 
+// Prevent over-zealous browser caching.
+app.use(function(req, res, next) {
+  req.headers['if-none-match'] = 'no-match-for-this';
+  next();    
+});
+
 app.use('/', routes);
+app.use('/', games);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -63,6 +70,10 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+
+// App Settings
+app.set('dataapi url', "http://localhost:8080/");
 
 
 module.exports = app;
